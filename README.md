@@ -60,7 +60,7 @@
 | Assistente Pessoal Autônomo | IA / Agentes | Python · FastAPI · React | 🔵 Em desenvolvimento |
 | Otimizador de Estratégias | Dados / ML | Python · XGBoost · Optuna | ⏸️ Pausado |
 | App de Gestão de Carteira | Mobile / Fintech | React Native · Expo · TS | ⚪ Especificado |
-| Laboratório de Execução | Pesquisa | Python · MT5 API | 🔬 Ativo |
+| Laboratório de Execução | Pesquisa / Dados | Python · MT5 API · SQLite | 🔬 Ativo |
 | Engenharia Reversa | Pesquisa / Segurança | Ghidra · Análise de binários | 🔬 Ativo |
 
 <br>
@@ -224,8 +224,16 @@ Escrever a especificação antes de codar é deliberado: é a parte do sistema s
 ### 🧪 Laboratório de Execução Automatizada
 ![Status](https://img.shields.io/badge/status-ativo-success)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 
-Ambiente isolado, em conta de demonstração, para desenvolver e validar automações de execução em condições reais de mercado — sem risco financeiro. Serve como campo de prova para ideias que só depois migram para os projetos de produção.
+Ambiente isolado, em conta de demonstração, para desenvolver e validar automações de execução em condições reais — sem risco financeiro. Evoluiu de um campo de provas manual para um **ciclo de pesquisa automatizado**, em que nenhuma ideia vira operação sem passar por evidência estatística:
+
+- **Hipótese → validação fora da amostra → promoção → operação → medição**, com cada transição registrada junto do motivo e dos números que a justificaram;
+- **Rigor estatístico como portão:** t-stat, intervalo de confiança e *Deflated Sharpe Ratio* (correção por múltiplas comparações) — resultado cujo intervalo cruza zero é tratado como **inconclusivo**, nunca como sucesso nem fracasso;
+- **Laboratório próprio de simulação**, com cada peça coberta por teste que prova que ela *altera* o resultado, e um "gêmeo" que compara o simulado com a execução real para detectar divergência;
+- **LLM como pesquisador, nunca como executor:** gera hipóteses; um motor mecânico opera e a validação automática decide;
+- **Operação resiliente:** idempotência e *write-ahead* na execução de ordens, supervisor com *heartbeat* que religa processos, limites de risco e escada de exposição liberada só por evidência acumulada;
+- **Teste em tempo real com exposição mínima**, para medir custo e latência reais antes de qualquer escala.
 
 ### 🔍 Engenharia Reversa e Análise de Binários
 ![Status](https://img.shields.io/badge/status-ativo-success)
@@ -247,13 +255,13 @@ O que se repete em todos os projetos, independente da linguagem:
 `Separação de camadas` · `Microsserviços orientados a eventos` · `Padrão DAO / repositório` · `Máquinas de estado` · `Adaptadores para isolar dependência externa` · `Lógica sensível server-authoritative` · `Serverless (Cloud Functions)`
 
 **Qualidade e operação**
-`Testes unitários e de integração` · `Critérios de aceite antes do código` · `Validação em pequena escala antes de qualquer operação em massa` · `Watchdog e autorrecuperação` · `Logging estruturado` · `Deploy desatendido em VPS` · `Versionamento semântico com auditoria por release`
+`Testes unitários e de integração` · `Critérios de aceite antes do código` · `Validação em pequena escala antes de qualquer operação em massa` · `Validação fora da amostra com correção por múltiplas comparações` · `Idempotência e write-ahead em execução` · `Watchdog e autorrecuperação` · `Logging estruturado` · `Deploy desatendido em VPS` · `Versionamento semântico com auditoria por release`
 
 **Segurança**
 `Credenciais fora do código e do versionamento` · `Validação e sanitização em toda fronteira externa` · `Attestation de app (Play Integrity)` · `Regras de acesso versionadas junto do código` · `Sandbox e quarentena para execução não confiável`
 
 **Dados e IA**
-`Integração com LLM multi-provedor com failover` · `Memória persistente em camadas` · `Otimização de hiperparâmetros` · `OCR on-device` · `Indexação geoespacial` · `ETL e pipelines de coleta`
+`Integração com LLM multi-provedor com failover` · `LLM como pesquisador, com validação mecânica como juiz` · `Memória persistente em camadas` · `Otimização de hiperparâmetros` · `OCR on-device` · `Indexação geoespacial` · `ETL e pipelines de coleta`
 
 **Processo**
 Documentação viva versionada junto do código, decisões de arquitetura registradas com o **porquê** (não só o quê), e engenharia de contexto para agentes de IA — mantendo memória estruturada e auditável entre sessões de trabalho, de forma que a informação certa esteja disponível no momento certo em vez de ser reconstruída toda vez.
